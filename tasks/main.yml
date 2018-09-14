@@ -1,0 +1,29 @@
+---
+tasks:
+- name: create new ansible user
+  user:
+    name: ansible
+    state: present
+    groups: sudo
+
+- name: enable passwordless sudo for ansible user
+  copy:
+    src: ansible.sudoers
+    dest: /etc/sudoers.d/ansible
+    owner: root
+    group: root
+    mode: 0600
+
+- debug:
+    var: "hostvars[item]['orchestrationkey']"
+    verbosity: 1
+  with_items: "{{ groups['ansible-master'] }}"
+
+- name: deploy new ansible master ssh key
+  authorized_key:
+    exclusive: yes
+    key: "{{ hostvars[item]['orchestrationkey'] }}"
+    user: ansible
+    state: present
+    manage_dir: yes
+  with_items: "{{ groups['ansible-master'] }}"
