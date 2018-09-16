@@ -7,7 +7,7 @@ tasks:
     groups: sudo
 
 - name: enable passwordless sudo for ansible user
-  copy:
+  template:
     src: ansible.sudoers
     dest: /etc/sudoers.d/ansible
     owner: root
