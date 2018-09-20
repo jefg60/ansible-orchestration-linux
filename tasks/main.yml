@@ -1,7 +1,7 @@
 ---
 - name: create new ansible user
   user:
-    name: ansible
+    name: "{{ ansible_orchestration_user }}"
     state: present
     groups: sudo
     shell: /bin/bash
@@ -9,7 +9,7 @@
 - name: enable passwordless sudo for ansible user
   template:
     src: ansible.sudoers
-    dest: /etc/sudoers.d/ansible
+    dest: "/etc/sudoers.d/{{ ansible_orchestration_user }}"
     owner: root
     group: root
     mode: 0600
@@ -23,7 +23,7 @@
   authorized_key:
     exclusive: yes
     key: "{{ hostvars[item]['orchestrationkey'] }}"
-    user: ansible
+    user: "{{ ansible_orchestration_user }}"
     state: present
     manage_dir: yes
   with_items: "{{ groups['ansible-master'] }}"

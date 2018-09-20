@@ -16,7 +16,7 @@ with_items: "{{ groups['ansible-master'] }}"
 
 That means this role should always call the ansible-master role as a dependency, to get the ansible-master server's ansible user ssh public key.
 
-set ansible_user: to the name of the local user you would like to create on each managed server.
+set ansible_orchestration_user: to the name of the local user you would like to create on each managed server.
 
 If this is being run for the first time obviously you'll have to set ansible up to use whatever username is appropriate for the initial run, and then change the inventory / vars to use the new ansible orchestration user once this has sucessfully run.
 
@@ -37,11 +37,11 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: ansible-master
       roles:
-         - { role: jefg60.ansible-master, ansible_user: ansibleuser }
+         - { role: jefg60.ansible-master, ansible_orchestration_user: ansibleuser }
 
     - hosts: linux-servers
       roles:
-         - { role: jefg60.ansible-orchestration-linux, ansible_user: ansibleuser }
+         - { role: jefg60.ansible-orchestration-linux, ansible_orchestration_user: ansibleuser }
 
 License
 -------
