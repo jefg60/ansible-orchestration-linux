@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Sets up linux client servers with an ansible user with one and only one public ssh key which matches the ansible orchestration server's private key. We use the exclusive: yes parameter on the key deploy task to ensure that if the master's key is changed, the old key is removed from the dependant nodes.
+Sets up linux client servers with an ansible user with one and only one public ssh key which matches the ansible master server's private key. We use the exclusive: yes parameter on the key deploy task to ensure that if the master's key is changed, the old key is removed from the dependant nodes.
 
 Requirements
 ------------
@@ -10,7 +10,7 @@ Requirements
 Role Variables
 --------------
 
-The "{{ hostvars[item]['orchestrationkey'] }}" is used from the ansible-master role in the tasks file, thus:
+The "{{ hostvars[item]['orchestrationkey'] }}" is used from the jefg60.ansible-master role in the tasks file, thus:
 
 with_items: "{{ groups['ansible-master'] }}"
 
