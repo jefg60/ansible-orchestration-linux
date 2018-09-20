@@ -4,6 +4,7 @@
     name: ansible
     state: present
     groups: sudo
+    shell: /bin/bash
 
 - name: enable passwordless sudo for ansible user
   template:
