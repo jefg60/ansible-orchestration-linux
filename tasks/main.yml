@@ -1,5 +1,4 @@
 ---
-tasks:
 - name: create new ansible user
   user:
     name: ansible
