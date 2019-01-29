@@ -3,7 +3,6 @@
   user:
     name: "{{ ansible_orchestration_user }}"
     state: present
-    groups: sudo
     shell: /bin/bash
     append: yes
 
