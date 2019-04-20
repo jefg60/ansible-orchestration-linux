@@ -4,6 +4,7 @@
     name: "{{ ansible_orchestration_user }}"
     state: present
     shell: /bin/bash
+    password: "*"
   when: "'ansible-master' not in group_names"
 
 - name: enable passwordless sudo for ansible user
