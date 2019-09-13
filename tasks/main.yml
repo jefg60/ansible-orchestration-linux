@@ -5,7 +5,7 @@
     state: present
     shell: /bin/bash
     password: "*"
-  when: "'ansible-master' not in group_names"
+  when: "'ansible_master' not in group_names"
 
 - name: enable passwordless sudo for ansible user
   template:
@@ -18,7 +18,7 @@
 - debug:
     var: "hostvars[item]['orchestrationkey']"
     verbosity: 1
-  with_items: "{{ groups['ansible-master'] }}"
+  with_items: "{{ groups['ansible_master'] }}"
 
 - name: deploy new ansible master ssh key
   authorized_key:
@@ -27,4 +27,4 @@
     user: "{{ ansible_orchestration_user }}"
     state: present
     manage_dir: yes
-  with_items: "{{ groups['ansible-master'] }}"
+  with_items: "{{ groups['ansible_master'] }}"

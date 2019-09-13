@@ -12,7 +12,7 @@ Role Variables
 
 The "{{ hostvars[item]['orchestrationkey'] }}" is used from the jefg60.ansible-master role in the tasks file, thus:
 
-with_items: "{{ groups['ansible-master'] }}"
+with_items: "{{ groups['ansible_master'] }}"
 
 That means this role should always call the ansible-master role as a dependency, to get the ansible-master server's ansible user ssh public key.
 
@@ -30,11 +30,11 @@ Example Playbook
 ----------------
 
 
-    - hosts: ansible-master
+    - hosts: ansible_master
       roles:
          - { role: jefg60.ansible-master, ansible_orchestration_user: ansibleuser }
 
-    - hosts: linux-servers
+    - hosts: linux_servers
       roles:
          - { role: jefg60.ansible-orchestration-linux, ansible_orchestration_user: ansibleuser }
 
